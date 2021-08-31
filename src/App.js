@@ -41,11 +41,27 @@ class App extends React.Component {
       this.setState({singleTodo: null})
     }
 
+    // Edit todo
+    const editTodo = (obj) => {
+      const updatedTodos = todos.map(todo => {
+        if(obj.id === todo.id) {
+          todo.todoBody = obj.todoBody
+        }
+        return todo
+      })
+      this.setState({todos: updatedTodos})
+      this.setState({singleTodo: null})
+    }
+
     // Conditional rendering
     if(singleTodo) {
       return (
         <div className="container">
-          <SingleTodo singleTodo={singleTodo} clearSingleTodo={clearSingleTodo} />
+          <SingleTodo 
+          singleTodo={singleTodo} 
+          clearSingleTodo={clearSingleTodo}
+          editTodo={editTodo}
+          />
         </div>
       )
     }
