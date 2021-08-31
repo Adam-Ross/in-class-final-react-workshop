@@ -4,12 +4,16 @@ import TodoItem from './TodoItem'
 class Todos extends React.Component {
     render() {
 
-        const {todos} = this.props
+        const {todos, deleteTodo} = this.props
 
         return(
             <div>
                 {todos.map(todo => (
-                    <TodoItem todo={todo} key={todo.id}/>
+                    <TodoItem 
+                    todo={todo} 
+                    key={todo.id} 
+                    deleteTodo={deleteTodo}
+                    />
                 ))}
             </div>
         )

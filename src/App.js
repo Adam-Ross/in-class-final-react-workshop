@@ -1,6 +1,9 @@
 import React from 'react'
 import Todos from './components/Todos'
 import TodoInput from './components/TodoInput'
+
+
+import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 
 class App extends React.Component {
@@ -12,21 +15,25 @@ class App extends React.Component {
   render() {
     const {todos} = this.state
 
+
+    // Add todo
     const addTodo = (obj) => {
-      if(todos.length === 0) {
-        obj.id = 1
-      } else {
-        obj.id = todos.length + 1
-      }
+      const id = uuidv4(); 
+      obj.id = id
       this.setState({todos: [...todos, obj ]})
-      console.log(todos)
     }
+
+    // Delete todo
+    const deleteTodo = (id) => {
+      this.setState({todos: todos.filter(todo => todo.id != id)})
+    }
+
 
     return(
       <div className="container">
         <h1 id="logo">Todo list in react</h1>
         <TodoInput addTodo={addTodo}/>
-        <Todos todos={todos} />
+        <Todos todos={todos} deleteTodo={deleteTodo} />
       </div>
     )
   }
