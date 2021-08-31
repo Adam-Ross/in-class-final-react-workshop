@@ -1,6 +1,8 @@
 import React from 'react'
 import Todos from './components/Todos'
 import TodoInput from './components/TodoInput'
+import SingleTodo from './components/SingleTodo'
+
 
 
 import { v4 as uuidv4 } from 'uuid';
@@ -9,11 +11,12 @@ import './App.css';
 class App extends React.Component {
 
   state = {
-    todos: []
+    todos: [],
+    singleTodo: null
   }
 
   render() {
-    const {todos} = this.state
+    const {todos, singleTodo} = this.state
 
 
     // Add todo
@@ -25,7 +28,26 @@ class App extends React.Component {
 
     // Delete todo
     const deleteTodo = (id) => {
-      this.setState({todos: todos.filter(todo => todo.id != id)})
+      this.setState({todos: todos.filter(todo => todo.id !== id)})
+    }
+
+    // selectSingleTodo
+    const selectSingleTodo = (todo) => {
+      this.setState({singleTodo: todo})
+    }
+
+    // Clear single todo
+    const clearSingleTodo = () => {
+      this.setState({singleTodo: null})
+    }
+
+    // Conditional rendering
+    if(singleTodo) {
+      return (
+        <div className="container">
+          <SingleTodo singleTodo={singleTodo} clearSingleTodo={clearSingleTodo} />
+        </div>
+      )
     }
 
 
@@ -33,7 +55,11 @@ class App extends React.Component {
       <div className="container">
         <h1 id="logo">Todo list in react</h1>
         <TodoInput addTodo={addTodo}/>
-        <Todos todos={todos} deleteTodo={deleteTodo} />
+        <Todos 
+        todos={todos} 
+        deleteTodo={deleteTodo}
+        selectSingleTodo={selectSingleTodo}
+         />
       </div>
     )
   }

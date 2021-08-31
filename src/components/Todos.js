@@ -4,7 +4,7 @@ import TodoItem from './TodoItem'
 class Todos extends React.Component {
     render() {
 
-        const {todos, deleteTodo} = this.props
+        const {todos, deleteTodo, selectSingleTodo} = this.props
 
         return(
             <div>
@@ -13,6 +13,7 @@ class Todos extends React.Component {
                     todo={todo} 
                     key={todo.id} 
                     deleteTodo={deleteTodo}
+                    selectSingleTodo={selectSingleTodo}
                     />
                 ))}
             </div>
